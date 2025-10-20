@@ -1,0 +1,45 @@
+{
+  "version": 3,
+  "middleware": {
+    "/": {
+      "files": [
+        "server/edge/chunks/_e40b77._.js",
+        "server/edge/chunks/[root of the server]__d50270._.js",
+        "server/edge/chunks/edge-wrapper_ba7eeb.js"
+      ],
+      "name": "middleware",
+      "page": "/",
+      "matchers": [
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/signin(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/signin"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/signup(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/signup"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/forgot-password(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/forgot-password"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/(\\/?index|\\/?index\\\\.json))?[\\/#\\?]?$",
+          "originalSource": "/"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "Gikq+O61i4nMi24Cp4uVxbmTN6cDljdfX3XDKU2tja4=",
+        "__NEXT_PREVIEW_MODE_ID": "6b7929744699183db73b85013e436f95",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "73f47da7daa6b71031a49b82a017af37006925e46d8b153eb9f55380ea191a61",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "352b842884abee5085c5d4591aee66cc9144eea0e8a7487bf2024bca22b377b3"
+      }
+    }
+  },
+  "sortedMiddleware": [
+    "/"
+  ],
+  "functions": {}
+}

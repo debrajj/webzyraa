@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap')
+layer(base);
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap')
+layer(base);
+
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --shadow-header_shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+
+  --color-dark_black: #1b1d1e;
+  --color-purple_blue: #4928fd;
+  --color-purple: #ba81ee;
+  --color-blue: #70b5ff;
+  --color-orange: #ffaf68;
+  --color-green: #79d45e;
+  --color-pink: #f4889a;
+  --color-blue_gradient: #d9f3fc;
+  --color-yellow_gradient: #fdf1d3;
+  --color-pale-yellow: #f6e683;
+  --color-dark_yellow_gradient: #443f32;
+  --color-dark_blue_gradient: #303d42;
+
+  --breakpoint-Xsm: 425px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1024px;
+  --breakpoint-xxl: 1280px;
+  --breakpoint-2xl: 1440px;
+
+  --spacing-25: 25rem;
+  --spacing-32: 32rem;
+  --spacing-38: 38rem;
+  --spacing-48: 48rem;
+  --spacing-50: 50rem;
+  --spacing-3_75: 3.75rem;
+  --spacing-6_5: 6.5rem;
+  --spacing-18_75: 18.75rem;
+  --spacing-31_25: 31.25rem;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility container {
+  @apply w-full max-w-[82.8rem] my-0 mx-auto py-0 sm:px-7 px-5 lg:px-12;
+}
+
+@layer utilities {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter Tight', sans-serif;
+    @apply dark:bg-dark_black;
+  }
+
+  body {
+  }
+
+  * {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .instrument-font {
+    font-family: 'Instrument Serif', serif;
+  }
+
+  .hero-mask {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+  }
+}
+
+@layer components {
+  body {
+    @apply text-base font-normal;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-3xl md:text-5xl font-medium text-dark_black dark:text-white;
+  }
+
+  p {
+    @apply text-sm  font-normal text-dark_black dark:text-white;
+  }
+
+  /* Swiper Customization */
+  .online-presence-swiper {
+    overflow: visible !important;
+    width: 100%;
+  }
+
+  .online-presence-swiper .swiper {
+    overflow: visible !important;
+  }
+
+  .online-presence-swiper .swiper-wrapper {
+    overflow: visible !important;
+  }
+
+  .online-presence-swiper .swiper-slide {
+    overflow: visible !important;
+  }
+
+  /* Mobile padding */
+  .online-presence-swiper .swiper {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  @media (min-width: 576px) {
+    .online-presence-swiper .swiper {
+      padding-left: 1.75rem;
+      padding-right: 1.75rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .online-presence-swiper .swiper {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  .online-presence-swiper .swiper-button-next,
+  .online-presence-swiper .swiper-button-prev {
+    background: rgba(255, 255, 255, 0.9);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .online-presence-swiper .swiper-button-next,
+    .online-presence-swiper .swiper-button-prev {
+      display: flex;
+    }
+  }
+
+  .online-presence-swiper .swiper-button-next:hover,
+  .online-presence-swiper .swiper-button-prev:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+  }
+
+  .dark .online-presence-swiper .swiper-button-next,
+  .dark .online-presence-swiper .swiper-button-prev {
+    background: rgba(31, 41, 55, 0.9);
+  }
+
+  .dark .online-presence-swiper .swiper-button-next:hover,
+  .dark .online-presence-swiper .swiper-button-prev:hover {
+    background: rgba(31, 41, 55, 1);
+  }
+
+  .online-presence-swiper .swiper-button-next:after,
+  .online-presence-swiper .swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1b1d1e;
+  }
+
+  .dark .online-presence-swiper .swiper-button-next:after,
+  .dark .online-presence-swiper .swiper-button-prev:after {
+    color: #ffffff;
+  }
+
+  .online-presence-swiper .swiper-pagination-bullet {
+    background: #d1d5db;
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .online-presence-swiper .swiper-pagination-bullet-active {
+    background: #4928fd;
+    width: 24px;
+    border-radius: 5px;
+  }
+
+  .dark .online-presence-swiper .swiper-pagination-bullet {
+    background: #4b5563;
+  }
+
+  /* Force object-fit on mobile */
+  .online-presence-swiper img {
+    object-fit: contain !important;
+  }
+
+  @media (min-width: 768px) {
+    .online-presence-swiper img {
+      object-fit: cover !important;
+    }
+  }
+}
