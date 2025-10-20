@@ -42,8 +42,7 @@ const footerData = {
         links: [
             { name: "Error 404", url: "/not-found" },
             { name: "Terms & Conditions", url: "/terms-and-conditions" },
-            { name: "Privacy Policy", url: "/privacy-policy" },
-            { name: "Documentation", url: "/documentation" }
+            { name: "Privacy Policy", url: "/privacy-policy" }
         ]
     },
     contactDetails: {

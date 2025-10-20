@@ -23,7 +23,7 @@ function Faq() {
 
   return (
     <section id='faq'>
-      <div className='2xl:py-16 py-8'>
+      <div className='section-spacing'>
         <div className='container'>
           <div className='flex flex-col gap-10 md:gap-20'>
             <div className='max-w-md text-center mx-auto'>
@@ -46,7 +46,7 @@ function Faq() {
                     value={`item-${index}`}
                     className='p-4 border border-dark_black/10 dark:border-white/50 group'>
                     <AccordionTrigger className='group-hover:cursor-pointer'>
-                      <p className='text-sm font-medium text-dark_black dark:text-white/80'>
+                      <p className='text-sm md:text-lg font-medium text-dark_black dark:text-white/80'>
                         {item.faq_que}
                       </p>
                     </AccordionTrigger>

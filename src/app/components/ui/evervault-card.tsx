@@ -15,16 +15,33 @@ export const EvervaultCard = ({
   let mouseY = useMotionValue(0);
 
   const [randomString, setRandomString] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     let str = generateRandomString(1500);
     setRandomString(str);
+    
+    // Check if mobile
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   function onMouseMove({ currentTarget, clientX, clientY }: any) {
     let { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
+
+    const str = generateRandomString(1500);
+    setRandomString(str);
+  }
+
+  function onTouchMove(e: React.TouchEvent) {
+    const touch = e.touches[0];
+    const { left, top } = e.currentTarget.getBoundingClientRect();
+    mouseX.set(touch.clientX - left);
+    mouseY.set(touch.clientY - top);
 
     const str = generateRandomString(1500);
     setRandomString(str);
@@ -39,7 +56,9 @@ export const EvervaultCard = ({
     >
       <div
         onMouseMove={onMouseMove}
-        className="group/card rounded-3xl w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full"
+        onTouchMove={onTouchMove}
+        onTouchStart={onTouchMove}
+        className="group/card rounded-3xl w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full active:opacity-100"
       >
         <CardPattern
           mouseX={mouseX}
@@ -63,13 +82,13 @@ export function CardPattern({ mouseX, mouseY, randomString }: any) {
 
   return (
     <div className="pointer-events-none">
-      <div className="absolute inset-0 rounded-2xl  [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
+      <div className="absolute inset-0 rounded-2xl [mask-image:linear-gradient(white,transparent)] opacity-50"></div>
       <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500 to-blue-700 opacity-0  group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
+        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500 to-blue-700 opacity-100 backdrop-blur-xl transition duration-500"
         style={style}
       />
       <motion.div
-        className="absolute inset-0 rounded-2xl opacity-0 mix-blend-overlay  group-hover/card:opacity-100"
+        className="absolute inset-0 rounded-2xl opacity-100 mix-blend-overlay"
         style={style}
       >
         <p className="absolute inset-x-0 text-xs h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500">

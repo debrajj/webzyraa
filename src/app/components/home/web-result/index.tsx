@@ -30,7 +30,7 @@ function WebResult() {
 
   return (
     <section id='aboutus'>
-      <div className='2xl:py-20 py-11'>
+      <div className='section-spacing'>
         <div className='container'>
           <div className='flex flex-col  lg:gap-16 gap-5'>
             <div className='flex flex-col items-center justify-center text-center gap-3'>

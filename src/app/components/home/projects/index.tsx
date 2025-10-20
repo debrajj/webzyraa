@@ -2,6 +2,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, ExternalLink, ArrowUpRight } from 'lucide-react';
 
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  mobileImage?: string;
+  website: string;
+  category: string;
+  tags: string[];
+}
+
 // Local image imports - using string paths for Next.js public directory
 const myntraClone = "/images/assets/landing page.png";
 const realtimeChess = "/images/assets/chess.png";
@@ -26,20 +36,41 @@ const golii = "/images/assets/goli_projects.png";
 const yogaa = "/images/assets/yogaa.png";
 const o2nutrition = "/images/assets/o2nutrition.png";
 
+// Mobile banner images
+const joyspoonMobile = "/images/assets/joyspoon_mobile.jpg";
+const specmakerMobile = "/images/assets/specmaker_mobile..jpg";
+const nistaraMobile = "/images/assets/nistara_mobile.jpg";
+const zubeenMobile = "/images/assets/zubeenda_mobile..jpg";
+const goliMobile = "/images/assets/goli_mobile..jpg";
+
 export const ProjectsSection = () => {
   const [currentProject, setCurrentProject] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const projects = [
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const allProjects: Project[] = [
     {
       title: "Joyspoon",
       description: "A vibrant wellness brand blending tradition with taste, specializing in handcrafted mukhwas and digestive blends — proudly featured on Shark Tank India and received a deal from Ritesh Agarwal, founder of OYO.",
       image: joyspoon,
+      mobileImage: joyspoonMobile,
       website: "https://joyspoon.in/",
       category: "E-commerce",
       tags: ["React", "Next.js", "TypeScript", "Tailwind", "Node.js"],
-    },    
+    },
     {
       title: "AutoLogue Design",
       description: "A leading motorcycle accessories brand known for precision-crafted parts and bold, performance-driven aesthetics.",
@@ -52,6 +83,7 @@ export const ProjectsSection = () => {
       title: "Nistara Naturals",
       description: "A conscious skincare brand rooted in Ayurveda, offering plant-based products designed to nourish, restore, and elevate everyday wellness.",
       image: nistaraNaturals,
+      mobileImage: nistaraMobile,
       website: "https://nistaranaturals.com/",
       category: "Beauty & Wellness",
       tags: ["React", "Next.js", "TypeScript", "Prisma", "PostgreSQL"],
@@ -68,6 +100,7 @@ export const ProjectsSection = () => {
       title: "Zubeenda.online",
       description: "A heartfelt digital tribute to Zubeen Garg, the legendary Assamese singer known as Luit Kontho. Built in just 3 days with cultural elements celebrating Assamese heritage and the Humming King's musical legacy.",
       image: zubeenImage,
+      mobileImage: zubeenMobile,
       website: "https://zubeenda.online/",
       category: "Cultural",
       tags: ["React", "Tribute", "Cultural", "Responsive", "SEO"],
@@ -108,6 +141,7 @@ export const ProjectsSection = () => {
       title: "Specsmakers",
       description: "A modern eyewear brand offering affordable yet stylish glasses, blending function, fashion, and visual clarity.",
       image: specsmaker,
+      mobileImage: specmakerMobile,
       website: "https://specsmakers.in/",
       category: "Fashion",
       tags: ["React", "Next.js", "TypeScript", "Tailwind", "Accessibility"],
@@ -132,6 +166,7 @@ export const ProjectsSection = () => {
       title: "Goli",
       description: "A globally recognized wellness brand known for its Apple Cider Vinegar and Ashwagandha gummies — built on Shopify to deliver a vibrant, health-focused experience.",
       image: golii,
+      mobileImage: goliMobile,
       website: "https://goli.com/",
       category: "Wellness",
       tags: ["React", "Next.js", "TypeScript", "Shopify API", "GraphQL"],
@@ -209,6 +244,9 @@ export const ProjectsSection = () => {
       tags: ["React", "Vite", "Next.js", "Payload", "VPS Server"],
     }
   ];
+
+  // Filter projects: on mobile, only show projects with mobileImage
+  const projects = isMobile ? allProjects.filter(p => p.mobileImage) : allProjects;
   
   const nextProject = () => {
     if (isAnimating) return;
@@ -247,7 +285,7 @@ export const ProjectsSection = () => {
 
   return (
     <section id='work'>
-      <div className='2xl:py-20 py-11'>
+      <div className='section-spacing'>
         <div className='container'>
           <div className='flex flex-col gap-10 md:gap-20'>
             {/* Header */}
@@ -270,11 +308,11 @@ export const ProjectsSection = () => {
                     className='w-full flex-shrink-0'
                   >
                         <div className='group cursor-pointer h-full'>
-                          <div className='relative overflow-hidden rounded-3xl bg-gray-100 dark:bg-gray-800 h-[600px] md:h-[700px]'>
+                          <div className='relative overflow-hidden rounded-3xl bg-gray-100 dark:bg-gray-800 h-[450px] md:h-[700px]'>
                             <img
-                              src={project.image}
+                              src={isMobile ? project.mobileImage! : project.image}
                               alt={project.title}
-                              className='w-full h-full object-fill transition-transform duration-700 group-hover:scale-105'
+                              className='w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105'
                             />
                             
                             {/* Overlay */}
@@ -317,12 +355,29 @@ export const ProjectsSection = () => {
                               </div>
                             </div>
 
-                            {/* Default state - Just title at bottom */}
-                            <div className='absolute bottom-0 left-0 right-0 p-8 md:p-10 bg-gradient-to-t from-black/80 to-transparent group-hover:opacity-0 transition-opacity duration-500'>
-                              <h3 className='text-2xl md:text-3xl font-bold text-white mb-2'>
-                                {project.title}
-                              </h3>
-                              <span className='text-white/70 text-sm'>{project.category}</span>
+                            {/* Default state - All details at bottom */}
+                            <div className='absolute bottom-0 left-0 right-0 p-8 md:p-10 bg-gradient-to-t from-black/90 via-black/70 to-transparent group-hover:opacity-0 transition-opacity duration-500'>
+                              <div className='space-y-3'>
+                                <span className='inline-block px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-white text-xs font-medium border border-white/20'>
+                                  {project.category}
+                                </span>
+                                <h3 className='text-2xl md:text-3xl font-bold text-white'>
+                                  {project.title}
+                                </h3>
+                                <p className='text-white/80 text-sm md:text-base leading-relaxed line-clamp-2'>
+                                  {project.description}
+                                </p>
+                                <div className='flex gap-2 flex-wrap'>
+                                  {project.tags?.slice(0, 4).map((tag, tagIndex) => (
+                                    <span
+                                      key={tagIndex}
+                                      className='px-2.5 py-1 bg-white/10 backdrop-blur-sm text-white text-xs font-medium rounded-full border border-white/20'
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>

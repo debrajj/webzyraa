@@ -1,18 +1,23 @@
 'use client'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import emailjs from '@emailjs/browser'
 
 function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    interest: 'design & branding',
+    interest: 'Web Development',
     budget: '',
     message: '',
   })
   const [submitted, setSubmitted] = useState(false)
   const [loader, setLoader] = useState(false)
+
+  useEffect(() => {
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!)
+  }, [])
   const handleChange = (e: any) => {
     const { name, value } = e.target
     setFormData((prevData) => ({
@@ -24,7 +29,7 @@ function ContactForm() {
   const reset = () => {
     formData.name = ''
     formData.email = ''
-    formData.interest = 'design & branding'
+    formData.interest = 'Web Development'
     formData.budget = ''
     formData.message = ''
   }
@@ -33,27 +38,45 @@ function ContactForm() {
     e.preventDefault()
     setLoader(true)
 
-    fetch('https://formsubmit.co/ajax/bhainirav772@gmail.com', {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        interest: formData.interest,
-        budget: formData.budget,
-        message: formData.message,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 
-        setSubmitted(data.success)
-        reset()
-      })
-      .catch((error) => {
-        console.log(error.message)
-      })
+    if (!serviceId || !templateId || !publicKey || templateId === 'YOUR_TEMPLATE_ID') {
+      console.error('EmailJS configuration missing. Please check your .env.local file')
+      alert('Email configuration error. Please contact support.')
+      setLoader(false)
+      return
+    }
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      interest: formData.interest,
+      budget: formData.budget,
+      message: formData.message,
+    }
+
+    emailjs
+      .send(serviceId, templateId, templateParams, publicKey)
+      .then(
+        (response) => {
+          console.log('SUCCESS!', response.status, response.text)
+          setSubmitted(true)
+          setLoader(false)
+          reset()
+        },
+        (error) => {
+          console.error('EmailJS Error Details:', {
+            error,
+            status: error.status,
+            text: error.text,
+            message: error.message
+          })
+          alert(`Failed to send email: ${error.text || error.message || 'Unknown error'}`)
+          setLoader(false)
+        }
+      )
   }
 
   return (
@@ -71,50 +94,67 @@ function ContactForm() {
               </h2>
             </div>
             {submitted ? (
-              <div className='flex flex-col items-center gap-5 text-center max-w-xl mx-auto p-6 rounded-lg bg-green/20 dark:bg-white/5'>
-                <div className='flex'>
-                  <Icon
-                    icon='ix:success-filled'
-                    width='30'
-                    height='30'
-                    style={{ color: '#79D45E' }}
-                  />
-                  <h5 className='text-green dark:text-green'>
-                    Great!!! Email has been Successfully Sent. We will get in
-                    touch asap.
-                  </h5>
+              <div className='flex flex-col items-center gap-8 text-center max-w-2xl mx-auto p-10 rounded-3xl bg-gradient-to-br from-green/10 via-green/5 to-transparent dark:from-green/20 dark:via-green/10 dark:to-transparent border border-green/20 dark:border-green/30 backdrop-blur-sm animate-in fade-in-0 zoom-in-95 duration-500'>
+                <div className='relative'>
+                  <div className='absolute inset-0 bg-green/20 rounded-full blur-xl animate-pulse'></div>
+                  <div className='relative bg-green/10 dark:bg-green/20 p-4 rounded-full border border-green/30'>
+                    <Icon
+                      icon='ix:success-filled'
+                      width='48'
+                      height='48'
+                      style={{ color: '#79D45E' }}
+                      className='animate-bounce'
+                    />
+                  </div>
+                </div>
+                
+                <div className='space-y-3'>
+                  <h3 className='text-2xl font-semibold text-green dark:text-green'>
+                    Message Sent Successfully!
+                  </h3>
+                  <p className='text-lg text-gray-600 dark:text-gray-300 leading-relaxed'>
+                    Thank you for reaching out! We've received your message and will get back to you within 24 hours.
+                  </p>
                 </div>
 
-                <Link
-                  href='/'
-                  className='group w-fit text-black font-medium bg-transparent dark:bg-white/20 dark:hover:bg-white rounded-full flex items-center gap-4 py-2 pl-5 pr-2 hover:bg-transparent border border-dark_black'>
-                  <span className='group-hover:translate-x-9 group-hover:dark:text-dark_black dark:text-white transform transition-transform duration-200 ease-in-out'>
-                    Back to home
-                  </span>
-                  <svg
-                    width='32'
-                    height='32'
-                    viewBox='0 0 32 32'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='group-hover:-translate-x-[125px] transition-all duration-200 ease-in-out group-hover:rotate-45'>
-                    <rect
-                      width='32'
-                      height='32'
-                      rx='16'
-                      fill='white'
-                      className=' transition-colors duration-200 ease-in-out fill-black'
+                <div className='flex flex-col sm:flex-row gap-4 w-full justify-center'>
+                  <Link
+                    href='/'
+                    className='group relative overflow-hidden bg-dark_black dark:bg-white text-white dark:text-dark_black font-medium rounded-full flex items-center justify-center gap-3 py-3 px-6 transition-all duration-300 hover:scale-105 hover:shadow-lg'>
+                    <span className='relative z-10 transition-transform duration-200 ease-in-out group-hover:translate-x-1'>
+                      Back to Home
+                    </span>
+                    <svg
+                      width='20'
+                      height='20'
+                      viewBox='0 0 32 32'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='relative z-10 transition-transform duration-200 ease-in-out group-hover:translate-x-1'>
+                      <path
+                        d='M11.832 11.3334H20.1654M20.1654 11.3334V19.6668M20.1654 11.3334L11.832 19.6668'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                      />
+                    </svg>
+                  </Link>
+                  
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className='group border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-full flex items-center justify-center gap-3 py-3 px-6 transition-all duration-300 hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800/50'>
+                    <span className='transition-transform duration-200 ease-in-out group-hover:translate-x-1'>
+                      Send Another Message
+                    </span>
+                    <Icon
+                      icon='material-symbols:refresh'
+                      width='20'
+                      height='20'
+                      className='transition-transform duration-200 ease-in-out group-hover:rotate-180'
                     />
-                    <path
-                      d='M11.832 11.3334H20.1654M20.1654 11.3334V19.6668M20.1654 11.3334L11.832 19.6668'
-                      stroke='#1B1D1E'
-                      strokeWidth='1.42857'
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      className=' transition-colors duration-200 ease-in-out stroke-white'
-                    />
-                  </svg>
-                </Link>
+                  </button>
+                </div>
               </div>
             ) : (
               <form
@@ -159,11 +199,9 @@ function ContactForm() {
                       id='interest'
                       value={formData.interest}
                       onChange={handleChange}>
-                      <option value='design & branding'>
-                        Design & Branding
-                      </option>
-                      <option value='Ecommerce'>Ecommerce</option>
-                      <option value='Specialist'>Specialist</option>
+                      <option value='Web Development'>Web Development</option>
+                      <option value='UI/UX Design'>UI/UX Design</option>
+                      <option value='Social Media Branding'>Social Media Branding</option>
                     </select>
                   </div>
                   <div className='w-full'>
@@ -175,8 +213,10 @@ function ContactForm() {
                       value={formData.budget}
                       onChange={handleChange}>
                       <option value=''>Select your budget</option>
-                      <option value='$10000'>$10,000</option>
-                      <option value='$50500'>$50,500</option>
+                      <option value='₹20,000'>₹20,000</option>
+                      <option value='₹45,000'>₹45,000</option>
+                      <option value='₹65,000'>₹65,000</option>
+                      <option value='₹1,00,000+'>₹1,00,000+</option>
                     </select>
                   </div>
                 </div>

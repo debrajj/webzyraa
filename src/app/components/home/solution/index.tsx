@@ -15,7 +15,7 @@ function Solutions() {
 
   return (
     <section id='solutions'>
-      <div className='2xl:py-20 py-11'>
+      <div className='section-spacing'>
         <div className='container'>
           <div
             ref={ref}
@@ -38,7 +38,7 @@ function Solutions() {
               </div>
               <Link
                 href='/contact'
-                className='group w-fit text-white font-medium bg-dark_black rounded-full flex items-center gap-4 py-2 pl-5 pr-2 hover:bg-transparent border border-dark_black'>
+                className='group w-fit text-white font-medium bg-dark_black rounded-full flex items-center gap-4 py-0.5 md:py-2 pl-3 md:pl-5 pr-1 md:pr-2 hover:bg-transparent border border-dark_black'>
                 <span className='group-hover:translate-x-9 group-hover:text-dark_black transform transition-transform duration-200 ease-in-out'>
                   Let’s Collaborate
                 </span>

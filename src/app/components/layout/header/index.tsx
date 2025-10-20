@@ -42,7 +42,7 @@ const Header = () => {
   return (
     <>
       <header className={`fixed top-0 z-50 w-full`}>
-        <div className='container p-3'>
+        <div className='container'>
           <nav
             className={`flex items-center py-3 px-4 justify-between ${
               sticky

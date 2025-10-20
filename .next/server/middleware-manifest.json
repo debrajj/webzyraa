@@ -3,42 +3,43 @@
   "middleware": {
     "/": {
       "files": [
-        "server/edge-runtime-webpack.js",
-        "server/src/middleware.js"
+        "server/edge/chunks/_e40b77._.js",
+        "server/edge/chunks/[root of the server]__d50270._.js",
+        "server/edge/chunks/edge-wrapper_ba7eeb.js"
       ],
-      "name": "src/middleware",
+      "name": "middleware",
       "page": "/",
       "matchers": [
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/signin(\\.json)?[\\/#\\?]?$",
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/signin(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/signin"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/signup(\\.json)?[\\/#\\?]?$",
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/signup(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/signup"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/forgot-password(\\.json)?[\\/#\\?]?$",
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/forgot-password(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/forgot-password"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/(\\/?index|\\/?index\\.json))?[\\/#\\?]?$",
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/(\\/?index|\\/?index\\\\.json))?[\\/#\\?]?$",
           "originalSource": "/"
         }
       ],
       "wasm": [],
       "assets": [],
       "env": {
-        "__NEXT_BUILD_ID": "KHHq_Ba9TQc_CFqjbX-En",
+        "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "Gikq+O61i4nMi24Cp4uVxbmTN6cDljdfX3XDKU2tja4=",
-        "__NEXT_PREVIEW_MODE_ID": "e513145714c8786bcde395e76e08c20d",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "7f9a996481fb1b29643eb8fb5e0dd0d9884e6ce5f0630474d7c288b40d7b47cc",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "b96d17a47b1d71880a14839e73a96af18ed4dba9340f665a2a8818217e644ff8"
+        "__NEXT_PREVIEW_MODE_ID": "c242b5e4dcc79d1fc6025bebabcee64e",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "ab0acea5bce9ecc5a98bc097df8a1c1b4566ef7d7b03588753613fe0b1b125a9",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "1dadf215ce5bc61e6bc67bccdc6aa98fbc2c26223757b12e93cddd46babd7206"
       }
     }
   },
-  "functions": {},
   "sortedMiddleware": [
     "/"
-  ]
+  ],
+  "functions": {}
 }

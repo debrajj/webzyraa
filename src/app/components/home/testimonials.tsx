@@ -6,7 +6,7 @@ import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 export default function Testimonials() {
   return (
     <section id='testimonials'>
-      <div className='2xl:py-20 py-11'>
+      <div className='section-spacing'>
         <div className='container'>
           <div className='flex flex-col gap-10 md:gap-20'>
             <div className='max-w-3xl text-center mx-auto'>

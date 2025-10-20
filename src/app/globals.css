@@ -98,6 +98,10 @@ layer(base);
   @apply w-full max-w-[82.8rem] my-0 mx-auto py-0 sm:px-7 px-5 lg:px-12;
 }
 
+@utility section-spacing {
+  @apply py-16 md:py-20 2xl:py-24;
+}
+
 @layer utilities {
   html {
     scroll-behavior: smooth;

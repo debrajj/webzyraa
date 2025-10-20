@@ -10,7 +10,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ title, description, badgeText, hoverText }: ServiceCardProps) {
   return (
-    <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start w-full mx-auto p-4 pb-8 sm:pb-6 relative h-[32rem] sm:h-[32rem]">
+    <div className="border border-black/[0.2] dark:border-white/[0.2] bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black flex flex-col items-start w-full mx-auto p-4 pb-8 sm:pb-6 relative h-[32rem] sm:h-[32rem] touch-manipulation active:scale-[0.99] transition-transform">
       <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" /> 
       <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
       <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />

@@ -1,14 +1,10 @@
 {
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/api/page-data/route": "app/api/page-data/route.js",
-  "/api/footer-data/route": "app/api/footer-data/route.js",
-  "/(site)/(auth)/signup/page": "app/(site)/(auth)/signup/page.js",
-  "/(site)/(auth)/forgot-password/page": "app/(site)/(auth)/forgot-password/page.js",
-  "/(site)/documentation/page": "app/(site)/documentation/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/(site)/contact/page": "app/(site)/contact/page.js",
   "/page": "app/page.js",
-  "/(site)/privacy-policy/page": "app/(site)/privacy-policy/page.js",
-  "/(site)/(auth)/signin/page": "app/(site)/(auth)/signin/page.js",
-  "/(site)/terms-and-conditions/page": "app/(site)/terms-and-conditions/page.js"
+  "/api/footer-data/route": "app/api/footer-data/route.js",
+  "/api/page-data/route": "app/api/page-data/route.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/(site)/contact/page": "app/(site)/contact/page.js",
+  "/(site)/about/page": "app/(site)/about/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/(site)/privacy-policy/page": "app/(site)/privacy-policy/page.js"
 }

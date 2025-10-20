@@ -35,14 +35,14 @@ function HeroSection() {
 
   return (
     <section id='home'>
-      <div className='relative w-full pt-40 2xl:pb-20 pb-1 md:pb-10 before:absolute before:w-full before:h-full before:bg-linear-to-r before:from-blue_gradient before:via-white before:to-yellow_gradient before:rounded-full before:top-24 before:blur-3xl before:-z-10 dark:before:from-dark_blue_gradient dark:before:via-black dark:before:to-dark_yellow_gradient dark:before:rounded-full dark:before:blur-3xl dark:before:-z-10'>
+      <div className='relative w-full pt-40 pb-16 md:pb-20 2xl:pb-24 before:absolute before:w-full before:h-full before:bg-linear-to-r before:from-blue_gradient before:via-white before:to-yellow_gradient before:rounded-full before:top-24 before:blur-3xl before:-z-10 dark:before:from-dark_blue_gradient dark:before:via-black dark:before:to-dark_yellow_gradient dark:before:rounded-full dark:before:blur-3xl dark:before:-z-10'>
         <div className='container relative z-10'>
           <div ref={ref} className='flex flex-col gap-8'>
             {/* ---------------- heading text --------------- */}
             <motion.div
               {...bottomAnimation}
               className='relative flex flex-col text-center items-center gap-4'>
-              <h1 className='font-semibold w-full lg:px-16 lg:pt-12 text-3xl sm:text-5xl md:text-5xl lg:text-7xl leading-tight lg:leading-none'>
+              <h1 className='font-semibold w-full lg:px-16 lg:pt-12 text-4xl sm:text-5xl md:text-5xl lg:text-7xl leading-tight sm:leading-snug lg:leading-none'>
                 Building powerful websites with
                 <span className='instrument-font italic font-normal dark:text-white/70'>
                   {' '}
@@ -65,7 +65,7 @@ function HeroSection() {
                 {/* ----------- Get started Link -------------- */}
                 <Link
                   href='/contact'
-                  className='group bg-purple_blue text-white font-medium flex flex-row justify-between items-center py-0.5 px-4 rounded-full w-49 md:max-w-64 md:w-full md:py-1 md:px-5 border border-purple_blue transition-all duration-200 ease-in-out hover:bg-transparent hover:text-purple_blue'>
+                  className='group bg-purple_blue text-white font-medium flex flex-row justify-between items-center py-0.5 md:py-1 px-3 md:px-5 rounded-full w-49 md:max-w-64 md:w-full border border-purple_blue transition-all duration-200 ease-in-out hover:bg-transparent hover:text-purple_blue'>
                   <span className='flex text-start transform transition-transform duration-200 ease-in-out group-hover:translate-x-28'>
                     Get Started
                   </span>
@@ -110,7 +110,7 @@ function HeroSection() {
                           width={44}
                           height={44}
                           quality={100}
-                          className='rounded-full border-2 border-white w-8 h-8 md:w-11 md:h-11'
+                          className='rounded-full border-2 border-blue-500 md:border-white w-7 h-7 md:w-11 md:h-11'
                           unoptimized={true}
                         />
                       </li>

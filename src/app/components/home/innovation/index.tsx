@@ -33,7 +33,7 @@ function Innovation() {
   })
   return (
     <section id='services' className='bg-white dark:bg-black'>
-      <div ref={ref} className='2xl:py-20 py-11'>
+      <div ref={ref} className='section-spacing'>
         <div className='container'>
           <div className='flex flex-col gap-12'>
             <div className='flex flex-col justify-center items-center gap-10 lg:gap-16'>
@@ -55,15 +55,15 @@ function Innovation() {
             </div>
             <motion.div
               {...bottomAnimation(3)}
-              className='flex flex-col gap-4 xl:flex xl:flex-row bg-dark_black items-center justify-between dark:bg-white/5 py-8 px-7 sm:px-12 rounded-3xl w-full'>
-              <h4 className='text-white text-center xl:text-left text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-tight'>
-                Ready to Transform Your Vision?
-                <br /> Let's Create Something Extraordinary Together!
+              className='flex flex-col gap-4 xl:flex xl:flex-row bg-dark_black items-center justify-between dark:bg-white/5 py-8 px-7 sm:px-12 rounded-3xl w-full border-2 border-gray-800 dark:border-white/20'>
+              <h4 className='text-white text-center xl:text-left text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl leading-tight'>
+                Ready to Transform Your Vision?<br className='hidden md:block' />
+                <span className='hidden md:inline'>Let's Create Something Extraordinary Together!</span>
               </h4>
               <div className='flex flex-col sm:flex-row gap-3 items-center'>
                 <Link
                   href='/contact'
-                  className='group gap-2 text-dark_black font-medium bg-white rounded-full flex items-center lg:gap-4 py-2 pl-5 pr-2 border border-white dark:border-opacity-50 hover:bg-transparent hover:text-white transition-all duration-200 ease-in-out'>
+                  className='group gap-2 text-dark_black font-medium bg-white rounded-full flex items-center lg:gap-4 py-0.5 md:py-2 pl-3 md:pl-5 pr-1 md:pr-2 border border-white dark:border-opacity-50 hover:bg-transparent hover:text-white transition-all duration-200 ease-in-out'>
                   <span className='group-hover:translate-x-9 transform transition-transform duration-200 ease-in-out'>
                     Let’s Collaborate
                   </span>
