@@ -1,58 +1,36 @@
 'use client'
-import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import StarRating from '../../shared/star-rating'
+import { avatarList } from '@/data'
+import OptimizedAvatar from '@/components/OptimizedAvatar'
 
 function HeroSection() {
-  const ref = useRef(null)
-   const [avatarList, setAvatarList] = useState<any>([]);
-   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/page-data')
-        if (!res.ok) throw new Error('Failed to fetch')
-        const data = await res.json()        
-        setAvatarList(data)
-        setIsLoading(false)
-      } catch (error) {
-        console.error('Error fetching services:', error)
-        setIsLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
-
   const bottomAnimation = {
-    initial: { y: '20%', opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    transition: { duration: 1, delay: 0.8 },
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.2 }
   }
 
   return (
     <section id='home'>
       <div className='relative w-full pt-40 pb-16 md:pb-20 2xl:pb-24 before:absolute before:w-full before:h-full before:bg-linear-to-r before:from-blue_gradient before:via-white before:to-yellow_gradient before:rounded-full before:top-24 before:blur-3xl before:-z-10 dark:before:from-dark_blue_gradient dark:before:via-black dark:before:to-dark_yellow_gradient dark:before:rounded-full dark:before:blur-3xl dark:before:-z-10'>
         <div className='container relative z-10'>
-          <div ref={ref} className='flex flex-col gap-8'>
+          <div className='flex flex-col gap-8'>
             {/* ---------------- heading text --------------- */}
             <motion.div
               {...bottomAnimation}
               className='relative flex flex-col text-center items-center gap-4'>
-              <h1 className='font-semibold w-full lg:px-16 lg:pt-12 text-4xl sm:text-5xl md:text-5xl lg:text-7xl leading-tight sm:leading-snug lg:leading-none'>
-                Building powerful websites with
+              <h1 className='font-semibold w-full px-1.5 lg:px-20 lg:pt-12 text-3xl sm:text-5xl md:text-5xl lg:text-7xl leading-tight sm:leading-snug lg:leading-none'>
+                We turn your business into the brand
                 <span className='instrument-font italic font-normal dark:text-white/70'>
                   {' '}
-                  modern technology
+                  people can't stop talking about
                 </span>
               </h1>
               <p className='max-w-38 text-dark_black/60 dark:text-white/60'>
-  At Webzyra, we help startups tackle UI/UX design, social media marketing, and web
-  development. <span className="hidden md:inline">From stunning interfaces to engaging social campaigns,
-  we bring your digital vision to life.</span>
+  At Webzyra, we create designs that convert, campaigns that go viral, and websites that sell. <span className="hidden md:inline">We'll transform your business into the brand everyone remembers and recommends.</span>
 </p>
 
 
@@ -102,16 +80,13 @@ function HeroSection() {
                 {/* --------------- avatar division -------------- */}
                 <div className='flex items-center gap-1 md:gap-7'>
                   <ul className='avatar flex flex-row items-center'>
-                    {!isLoading && avatarList?.avatarList?.map((items:any, index:any) => (
+                    {avatarList?.map((items:any, index:any) => (
                       <li key={index} className='-mr-2 z-1 avatar-hover:ml-2'>
-                        <Image
+                        <OptimizedAvatar
                           src={items.image}
-                          alt='Image'
-                          width={44}
-                          height={44}
-                          quality={100}
+                          alt={items.title}
+                          priority={index < 2}
                           className='rounded-full border-2 border-blue-500 md:border-white w-7 h-7 md:w-11 md:h-11'
-                          unoptimized={true}
                         />
                       </li>
                     ))}
@@ -122,7 +97,7 @@ function HeroSection() {
                       <StarRating count={4} color='#F59E0B' />
                     </div>
                     <p className='text-xs md:text-sm font-normal text-dark_black/60 dark:text-white/60'>
-                      Trusted by 500+ businesses
+                      Trusted by 200+ businesses
                     </p>
                   </div>
                 </div>

@@ -3,27 +3,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import FooterLogo from './FooterLogo'
 import { useTheme } from 'next-themes'
+import { footerData } from '@/data'
 
 const Footer = () => {
-  const [footerData, setfooterData] = useState<any>(null);
-  const { theme } = useTheme();
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/footer-data')
-        if (!res.ok) throw new Error('Failed to fetch')
-        const data = await res.json()        
-        setfooterData(data?.footerData)
-      } catch (error) {
-        console.error('Error fetching services:', error)
-      }
-    }
-    fetchData()
+    setMounted(true)
   }, [])
 
   return (
-    <footer className='relative pt-16 pb-6 bg-white dark:bg-black overflow-hidden border-t border-gray-200 dark:border-white/10'>
+    <footer className='relative pt-16 pb-6 bg-white dark:bg-black overflow-hidden border-t border-gray-200 dark:border-white/10 rounded-tl-[50px] rounded-tr-[50px]'>
       {/* Subtle Grid Background */}
       <div className='absolute inset-0 opacity-[0.02] dark:opacity-[0.05]'>
         <div className='absolute inset-0' style={{
@@ -50,7 +41,7 @@ const Footer = () => {
             
             {/* Large Creative Text */}
             <div className='relative'>
-              <h2 className='text-3xl md:text-4xl xl:text-5xl font-bold leading-tight tracking-tight'>
+              <h2 className='text-3xl md:text-4xl xl:text-5xl font-bold leading-none tracking-tight'>
                 <span className='block bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent'>
                   Let's Create
                 </span>
@@ -74,7 +65,7 @@ const Footer = () => {
                   className='group relative'>
                   <div className='p-3 bg-gray-100 dark:bg-white/5 hover:bg-purple-100 dark:hover:bg-purple-900/20 border border-gray-200 dark:border-white/10 rounded-xl transform group-hover:scale-110 transition-all duration-300'>
                     <Image
-                      src={theme === 'dark' ? item.dark_icon : item.icon}
+                      src={mounted && theme === 'dark' ? item.dark_icon : item.icon}
                       className='w-5 h-5 opacity-70 group-hover:opacity-100 transition-all duration-300 object-contain'
                       alt='social-icon'
                       height={20}
@@ -106,13 +97,6 @@ const Footer = () => {
                     </Link>
                   </li>
                 ))}
-                <li>
-                  <Link 
-                    href='/about'
-                    className='text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 text-sm'>
-                    About Us
-                  </Link>
-                </li>
               </ul>
             </div>
 
@@ -144,13 +128,10 @@ const Footer = () => {
                 </h3>
               </div>
               <div className='flex flex-col gap-3'>
-                <p className='text-gray-600 dark:text-gray-400 text-sm'>
-                  Silchar, Assam
-                </p>
                 <Link 
-                  href='mailto:webzyra1@gmail.com'
+                  href='mailto:hello@webzyra.in'
                   className='text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 text-sm break-all'>
-                  webzyra1@gmail.com
+                  hello@webzyra.in
                 </Link>
                 <Link 
                   href='tel:8638703614'

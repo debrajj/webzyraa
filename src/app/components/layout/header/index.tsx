@@ -1,9 +1,6 @@
 'use client'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { signOut, useSession } from 'next-auth/react'
-import { Icon } from '@iconify/react/dist/iconify.js'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import HeaderLink from './Navigation/HeaderLink'
 import { headerData } from './Navigation/Menudata'
@@ -12,9 +9,7 @@ import MobileHeader from './Navigation/MobileHeader'
 import ThemeToggler from './ThemeToggle'
 
 const Header = () => {
-  const { data: session } = useSession()
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [user, setUser] = useState<{ user: any } | null>(null)
   const [sticky, setSticky] = useState(false)
   const pathname = usePathname()
 
@@ -24,20 +19,10 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
-    const storedUser = localStorage.getItem('user')
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
-    }
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [pathname])
-
-  const handleSignOut = () => {
-    localStorage.removeItem('user')
-    signOut()
-    setUser(null)
-  }
 
   return (
     <>
@@ -52,7 +37,7 @@ const Header = () => {
             <div className='flex items-center'>
               <Logo />
             </div>
-            <div className='hidden lg:flex bg-dark_black/5 dark:bg-white/5 rounded-3xl py-3 px-1'>
+            <div className='hidden lg:flex bg-dark_black/5 dark:bg-white/5 rounded-3xl py-3 px-1 outfit-font'>
               <ul className='flex gap-0 2xl:gap-1.5'>
                 {headerData.map((item, index) => (
                   <HeaderLink key={index} item={item} />
@@ -63,36 +48,15 @@ const Header = () => {
               {/* ---------------------Light/Dark Mode button-------------------- */}
               <ThemeToggler />
               
-              {/* ---------------------SignUp SignIn Button-----------------  */}
-              {user?.user || session?.user ? (
-                <div className='hidden lg:flex gap-4'>
-                  <button
-                    onClick={() => handleSignOut()}
-                    className='flex group font-normal items-center gap-1 transition-all duration-200 ease-in-out text-white px-4 py-2 bg-dark_black dark:bg-white/15 rounded-full hover:text-dark_black hover:bg-white dark:hover:bg-white/5 dark:hover:text-white border border-dark_black'>
-                    Sign Out
-                    <Icon icon='solar:logout-outline' width='25' height='25' />
-                  </button>
-                  <div className='relative group'>
-                    <Image
-                      src='/images/home/avatar_1.jpg'
-                      alt='Image'
-                      width={40}
-                      height={40}
-                      quality={100}
-                      className='rounded-full cursor-pointer'
-                    />
-                    <p className='absolute w-fit text-sm text-center z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-200 bg-white dark:bg-white/5 text-dark_black/60 p-1 min-w-28 rounded-lg shadow-2xl top-full left-1/2 transform -translate-x-1/2 mt-3'>
-                      {user?.user || session?.user?.name}
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className='flex items-center gap-2'>
-                  <Link href={'/contact'} className='hidden lg:block text-white px-2.5 xl:px-4 py-2  bg-dark_black dark:bg-white/20 rounded-full hover:opacity-90'>
-                    Call Now
-                  </Link>
-                </div>
-              )}
+              {/* ---------------------Call Now Button-----------------  */}
+              <div className='flex items-center gap-2'>
+                <Link href={'tel:8638703614'} className='hidden lg:flex items-center gap-2 text-white px-2.5 xl:px-4 py-2  bg-dark_black dark:bg-white/20 rounded-full hover:opacity-90'>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  Call Now
+                </Link>
+              </div>
 
               <div className='hidden max-lg:flex'>
                 <button onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -124,9 +88,9 @@ const Header = () => {
           />
         )}
         <div
-          className={`lg:hidden fixed top-0 right-0 h-full w-full bg-white dark:bg-dark_black shadow-lg transform transition-transform duration-300 max-w-xs ${
+          className={`lg:hidden fixed top-0 right-0 h-full w-80 max-w-[calc(100vw-2rem)] bg-white dark:bg-dark_black shadow-lg transform transition-transform duration-300 ${
             sidebarOpen ? 'translate-x-0' : 'translate-x-full'
-          } z-50`}>
+          } z-50 overflow-hidden`}>
           <div className='flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700'>
             <h2 className='text-lg font-bold text-dark_black dark:text-white'>Menu</h2>
             <button
@@ -150,42 +114,22 @@ const Header = () => {
               </svg>
             </button>
           </div>
-          <div className='p-4'>
+          <div className='p-4 outfit-font'>
             <ul className='flex flex-col gap-0'>
               {headerData.map((item, index) => (
                 <MobileHeader key={index} item={item} onClose={() => setSidebarOpen(false)} />
               ))}
             </ul>
             <div className='mt-4 pt-3 border-t border-gray-200 dark:border-gray-700'>
-              {user || session?.user ? (
-                <div className='space-y-2'>
-                  <button
-                    onClick={() => signOut()}
-                    className='flex w-full items-center gap-2 p-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors'>
-                    <Icon icon='solar:logout-outline' width='20' height='20' />
-                    <span>Sign Out</span>
-                  </button>
-                  <div className='flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg'>
-                    <Image
-                      src='/images/home/avatar_1.jpg'
-                      alt='Profile'
-                      width={24}
-                      height={24}
-                      className='rounded-full'
-                    />
-                    <span className='text-sm text-dark_black dark:text-white truncate'>
-                      {user?.user?.email || session?.user?.name}
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  href='/contact'
-                  onClick={() => setSidebarOpen(false)}
-                  className='flex items-center justify-center w-full p-3 bg-dark_black dark:bg-white text-white dark:text-dark_black rounded-lg hover:opacity-90 transition-opacity'>
-                  Call Now
-                </Link>
-              )}
+              <Link
+                href='tel:8638703614'
+                onClick={() => setSidebarOpen(false)}
+                className='flex items-center justify-center gap-2 w-full p-3 bg-dark_black dark:bg-white text-white dark:text-dark_black rounded-lg hover:opacity-90 transition-opacity'>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                Call Now
+              </Link>
             </div>
           </div>
         </div>

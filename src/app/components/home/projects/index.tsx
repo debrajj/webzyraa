@@ -287,7 +287,7 @@ export const ProjectsSection = () => {
     <section id='work'>
       <div className='section-spacing'>
         <div className='container'>
-          <div className='flex flex-col gap-10 md:gap-20'>
+          <div className='flex flex-col gap-6 md:gap-12'>
             {/* Header */}
             <div className='max-w-3xl text-center mx-auto'>
               <h2>

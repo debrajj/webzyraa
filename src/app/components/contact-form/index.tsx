@@ -200,8 +200,14 @@ function ContactForm() {
                       value={formData.interest}
                       onChange={handleChange}>
                       <option value='Web Development'>Web Development</option>
-                      <option value='UI/UX Design'>UI/UX Design</option>
-                      <option value='Social Media Branding'>Social Media Branding</option>
+                      <option value='E-commerce Development'>E-commerce Development</option>
+                      <option value='Custom Web Applications'>Custom Web Applications</option>
+                      <option value='Website Redesign'>Website Redesign</option>
+                      <option value='Mobile-Responsive Design'>Mobile-Responsive Design</option>
+                      <option value='SEO & Performance Optimization'>SEO & Performance Optimization</option>
+                      <option value='Social Media Marketing'>Social Media Marketing</option>
+                      <option value='Brand Identity Design'>Brand Identity Design</option>
+                      <option value='Logo & Branding'>Logo & Branding</option>
                     </select>
                   </div>
                   <div className='w-full'>

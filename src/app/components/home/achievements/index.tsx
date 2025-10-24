@@ -1,28 +1,12 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import SingleAchievement from './SingleAchievement'
+import { achievementsList } from '@/data'
 
 function Achievements() {
   const ref = useRef(null)
   const inView = useInView(ref)
-  const [achievementsList, setAchievementsList] = useState<any>(null);
-
-  useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const res = await fetch('/api/page-data')
-          if (!res.ok) throw new Error('Failed to fetch')
-  
-          const data = await res.json()
-          setAchievementsList(data?.achievementsList)
-        } catch (error) {
-          console.error('Error fetching services:', error)
-        }
-      }
-  
-      fetchData()
-    }, [])
 
   const bottomAnimation = (index: any) => ({
     initial: { y: '5%', opacity: 0 },
@@ -44,7 +28,7 @@ function Achievements() {
               </h2>
             </div>
             <div className='grid md:grid-cols-2 xl:grid-cols-3 gap-6'>
-              {achievementsList?.map((item:any, index:any) => {
+              {achievementsList.map((item:any, index:any) => {
                 return (
                   <motion.div {...bottomAnimation(index)} key={index}>
                     <SingleAchievement key={index} achievements={item} />

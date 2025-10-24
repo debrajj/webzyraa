@@ -99,7 +99,7 @@ layer(base);
 }
 
 @utility section-spacing {
-  @apply py-16 md:py-20 2xl:py-24;
+  @apply py-8 md:py-12 2xl:py-16;
 }
 
 @layer utilities {
@@ -107,9 +107,19 @@ layer(base);
     scroll-behavior: smooth;
     font-family: 'Inter Tight', sans-serif;
     @apply dark:bg-dark_black;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
   }
 
   body {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    /* iOS Safari animation fix */
+    -webkit-overflow-scrolling: touch;
   }
 
   * {
@@ -117,12 +127,70 @@ layer(base);
     padding: 0%;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (max-width: 767px) {
+    .pb-16 {
+      padding-bottom: 2rem !important;
+    }
+    
+    /* Mobile performance optimizations */
+    * {
+      will-change: auto;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    
+    img, video {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+    
+    /* Prevent horizontal scroll */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+    
+    /* Fix mobile menu overflow */
+    .lg\:hidden {
+      max-width: calc(100vw - 1rem);
+    }
+    
+    /* Force hardware acceleration for animations */
+    [data-framer-motion] {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: transform, opacity;
+    }
+    
+    /* Optimize animations for mobile */
+    @media (prefers-reduced-motion: no-preference) {
+      * {
+        scroll-behavior: smooth;
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   }
 }
 
 @layer utilities {
   .instrument-font {
     font-family: 'Instrument Serif', serif;
+  }
+
+  .outfit-font {
+    font-family: var(--font-outfit), 'Outfit', sans-serif;
   }
 
   .hero-mask {

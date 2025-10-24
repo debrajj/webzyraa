@@ -15,13 +15,12 @@ const Logo: React.FC<HeaderProps> = () => {
 
     if (!mounted) {
         return (
-            <Link href="/">
+            <Link href="/" aria-label="Webzyraa Homepage">
                 <Image
-                    src="/images/logo/new_txt_black_logo.png"
-                    alt="logo"
-                    width={50}
-                    height={15}
-                    quality={100}
+                    src="/images/logo/new_txt_black_logo.webp"
+                    alt="Webzyraa - Professional Web Development Company Logo"
+                    width={112}
+                    height={32}
                     priority={true}
                     className='w-28 h-auto'
                 />
@@ -30,13 +29,12 @@ const Logo: React.FC<HeaderProps> = () => {
     }
 
     return (
-        <Link href="/">
+        <Link href="/" aria-label="Webzyraa Homepage">
             <Image
-                src={theme === 'dark' ? "/images/logo/new_webzyra.png" : "/images/logo/new_txt_black_logo.png"}
-                alt="logo"
-                width={50}
-                height={15}
-                quality={100}
+                src={theme === 'dark' ? "/images/logo/new_webzyra.webp" : "/images/logo/new_txt_black_logo.webp"}
+                alt="Webzyraa - Professional Web Development Company Logo"
+                width={112}
+                height={32}
                 priority={true}
                 className='w-28 h-auto'
             />

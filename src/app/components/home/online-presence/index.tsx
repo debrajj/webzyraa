@@ -2,7 +2,7 @@
 import { ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { onlinePresenceList } from '@/data'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -10,26 +10,9 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 function OnlinePresence() {
-  const [onlinePresenceList, setonlinePresenceList] = useState<any>(null);
-
-  useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const res = await fetch('/api/page-data')
-          if (!res.ok) throw new Error('Failed to fetch')
-  
-          const data = await res.json()
-          setonlinePresenceList(data?.onlinePresenceList)
-        } catch (error) {
-          console.error('Error fetching services:', error)
-        }
-      }
-  
-      fetchData()
-    }, [])
 
   return (
-    <section id='work' className='2xl:py-20 py-11'>
+    <section id='online-presence' className='2xl:py-20 py-11'>
       <div className='container'>
         <div className='flex flex-col justify-center items-center gap-10 md:gap-20'>
           <div className='max-w-2xl text-center'>
@@ -64,7 +47,7 @@ function OnlinePresence() {
               style={{ overflow: 'visible' }}
               className='w-full !overflow-visible'
             >
-                {onlinePresenceList?.map((items:any, index:any) => {
+                {onlinePresenceList.map((items:any, index:any) => {
                   return (
                     <SwiperSlide key={index}>
                       <div className='group flex flex-col gap-6 cursor-pointer pb-12'>

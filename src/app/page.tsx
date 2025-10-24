@@ -1,17 +1,16 @@
-import { Metadata } from "next";
-import Brand from "./components/home/brand";
-import Faq from "./components/home/faq";
+import dynamic from 'next/dynamic';
 import HeroSection from "./components/home/hero";
-import Innovation from "./components/home/innovation";
-import ProjectsSection from "./components/home/projects";
-import Solutions from "./components/home/solution";
-import Testimonials from "./components/home/testimonials";
-import WebResult from "./components/home/web-result";
 
-export const metadata: Metadata = {
-    title: "Home | Webzyra",
-};
-
+// Lazy load components that are below the fold
+const Brand = dynamic(() => import("./components/home/brand"), {
+  loading: () => <div className="h-20 animate-pulse bg-gray-100" />
+});
+const WebResult = dynamic(() => import("./components/home/web-result"));
+const Innovation = dynamic(() => import("./components/home/innovation"));
+const ProjectsSection = dynamic(() => import("./components/home/projects"));
+const Testimonials = dynamic(() => import("./components/home/testimonials"));
+const Faq = dynamic(() => import("./components/home/faq"));
+const Solutions = dynamic(() => import("./components/home/solution"));
 
 export default function Home() {
   return (

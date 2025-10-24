@@ -11,7 +11,7 @@ interface ServiceCardProps {
 function ServiceCard({ title, description, badgeText, hoverText }: ServiceCardProps) {
   return (
     <div className="border border-black/[0.2] dark:border-white/[0.2] bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black flex flex-col items-start w-full mx-auto p-4 pb-8 sm:pb-6 relative h-[32rem] sm:h-[32rem] touch-manipulation active:scale-[0.99] transition-transform">
-      <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" /> 
+      <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
       <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
       <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
       <Icon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black" />
@@ -32,22 +32,25 @@ export function ServiceCards() {
   const services = [
     {
       title: "Web Development",
-      description: "We build modern, responsive, and scalable web applications tailored to your business needs. From frontend interfaces to backend systems, we deliver high-performance solutions that drive results.",
-      badgeText: "Full Stack Solutions",
-      hoverText: "Web"
+      description:
+        "We craft high-performance websites using WordPress, Shopify, or custom code. Whether you're launching a store or a bespoke platform, we build fast, mobile-friendly, and scalable solutions that drive growth.",
+      badgeText: "WordPress • Shopify •Custom Code",
+      hoverText: "Website",
     },
     {
-      title: "UI/UX Design",
-      description: "We create stunning, user-friendly designs that engage your audience. Our design process focuses on understanding your users and crafting experiences that are both beautiful and intuitive.",
-      badgeText: "Design Excellence",
-      hoverText: "UI/UX"
+      title: "Social Media Marketing",
+      description:
+        "From engaging Instagram Reels to Facebook posts, we grow your presence with scroll-stopping content and smart strategy. Let’s turn followers into loyal customers and amplify your brand’s voice.",
+      badgeText: "Reels • Posts • Growth",
+      hoverText: "SMM",
     },
     {
-      title: "Social Media",
-      description: "We manage and grow your brand's social media presence across all platforms. From content creation to community engagement, we help you connect with your audience and build lasting relationships.",
-      badgeText: "Brand Growth",
-      hoverText: "Social"
-    }
+      title: "Branding",
+      description:
+        "Your brand is more than a logo. We build memorable brand identities with stunning visuals, consistent messaging, and clear strategy—helping you stand out and stay unforgettable.",
+      badgeText: "Logos • Identity • Style",
+      hoverText: "Branding",
+    },
   ];
 
   return (

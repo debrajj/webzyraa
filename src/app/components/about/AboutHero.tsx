@@ -9,7 +9,7 @@ export default function AboutHero() {
   }
 
   return (
-    <section className='pt-32 pb-8 md:pt-40 md:pb-16 2xl:pb-24'>
+    <section className='pt-24 pb-8 md:pt-40 md:pb-16 2xl:pb-24'>
       <div className='relative w-full before:absolute before:w-full before:h-full before:bg-linear-to-r before:from-blue_gradient before:via-white before:to-yellow_gradient before:rounded-full before:top-0 before:blur-3xl before:-z-10 dark:before:from-dark_blue_gradient dark:before:via-black dark:before:to-dark_yellow_gradient'>
         <div className='container relative z-10'>
           <motion.div

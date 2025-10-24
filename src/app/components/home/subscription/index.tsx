@@ -1,25 +1,10 @@
 "use client";
+import { useEffect } from 'react';
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react';
+import { startupPlanList } from '@/data';
 
 function Subscription() {
-  const [startupPlanList, setstartupPlanList] = useState<any>(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/page-data')
-        if (!res.ok) throw new Error('Failed to fetch')
-
-        const data = await res.json()
-        setstartupPlanList(data?.startupPlanList)
-      } catch (error) {
-        console.error('Error fetching services:', error)
-      }
-    }
-
-    fetchData()
-  }, [])
   return (
     <section id='pricing'>
       <div className='2xl:py-20 py-11'>

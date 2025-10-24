@@ -19,21 +19,19 @@ function Solutions() {
         <div className='container'>
           <div
             ref={ref}
-            className='py-16 md:py-28 px-6 border border-dark_black/10 rounded-3xl bg-[linear-gradient(90deg,#CDEFFB_0%,#FFFFFF_33.23%,#FFFFFF_65.77%,#FDEECB_100%)] backdrop-blur-[200px] dark:opacity-80'>
+            className='py-10 md:py-16 px-6 border border-dark_black/10 rounded-3xl bg-[linear-gradient(90deg,#CDEFFB_0%,#FFFFFF_33.23%,#FFFFFF_65.77%,#FDEECB_100%)] backdrop-blur-[200px] dark:opacity-80'>
             <motion.div
               {...bottomAnimation}
               className='flex flex-col gap-6 items-center md:max-w-3xl mx-auto'>
               <div className='flex flex-col gap-3 items-center text-center'>
                 <h2 className='text-3xl md:text-5xl dark:text-dark_black'>
-                  Innovative Solutions for{' '}
+                  Turn your vision into{' '}
                   <span className='instrument-font italic font-normal dark:text-black/70'>
-                    Bold Brands
+                    market dominance
                   </span>
                 </h2>
                 <p className='dark:text-dark_black'>
-                  Looking to elevate your brand? We craft immersive experiences
-                  that captivate, engage, and make your business unforgettable
-                  in every interaction.
+                  Stop blending in. We create digital experiences that don't just look stunning—they drive results. From 10x conversion rates to viral social campaigns, we turn your startup into an industry leader.
                 </p>
               </div>
               <Link

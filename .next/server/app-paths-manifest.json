@@ -1,10 +1,11 @@
 {
-  "/page": "app/page.js",
-  "/api/footer-data/route": "app/api/footer-data/route.js",
-  "/api/page-data/route": "app/api/page-data/route.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/(site)/contact/page": "app/(site)/contact/page.js",
-  "/(site)/about/page": "app/(site)/about/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/(site)/blog/page": "app/(site)/blog/page.js",
   "/_not-found/page": "app/_not-found/page.js",
-  "/(site)/privacy-policy/page": "app/(site)/privacy-policy/page.js"
+  "/page": "app/page.js",
+  "/(site)/about/page": "app/(site)/about/page.js",
+  "/(site)/privacy-policy/page": "app/(site)/privacy-policy/page.js",
+  "/(site)/contact/page": "app/(site)/contact/page.js",
+  "/(site)/blog/why-having-website-important-nowadays/page": "app/(site)/blog/why-having-website-important-nowadays/page.js",
+  "/(site)/terms-and-conditions/page": "app/(site)/terms-and-conditions/page.js"
 }
